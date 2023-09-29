@@ -1,26 +1,31 @@
 const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
+const sourcemaps = require("gulp-sourcemaps");
 // pacote 'gulp-sass' é responsável por integrar o sass com o gulp
 // o pacote 'sass' que fará toda a compilação
 
 /* 
-#funções
+#métodos
 - 'src' -> recebe como parametro os arquivos e as pastas do codigo sass;
 - 'pipe' -> tem as papel de encadear as funções;
 - 'dest' -> para onde os arquivos seram destinados.
 
-#parâmetros
+#Função
 - callback -> gulp injetará uma função
+- sourcemaps.init -> 
+- soucemaps.write -> criar o arquivo de maepamento
 */
 
 function compliaSass() {
   return gulp
     .src("./source/styles/main.scss")
+    .pipe(sourcemaps.init())
     .pipe(
       sass({
         outputStyle: "compressed",
       })
     )
+    .pipe(sourcemaps.write("./maps"))
     .pipe(gulp.dest("./build/styles"));
 }
 
