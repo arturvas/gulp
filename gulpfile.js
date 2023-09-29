@@ -1,3 +1,5 @@
+const gulp = require("gulp");
+
 function funcaoPadrao(callback) {
   /* callback -> gulp injetará uma função */
   console.log("Executando via Gulp");
@@ -14,5 +16,5 @@ function dizTchau() {
   console.log("Tchau, Gulp!");
 }
 
-exports.default = funcaoPadrao;
+exports.default = gulp.series(funcaoPadrao, cumprimento);
 exports.cumprimento = cumprimento;
