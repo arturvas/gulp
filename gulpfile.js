@@ -16,7 +16,11 @@ const sass = require("gulp-sass")(require("sass"));
 function compliaSass() {
   return gulp
     .src("./source/styles/main.scss")
-    .pipe(sass())
+    .pipe(
+      sass({
+        outputStyle: "compressed",
+      })
+    )
     .pipe(gulp.dest("./build/styles"));
 }
 
