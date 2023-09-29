@@ -51,3 +51,10 @@ function dizTchau() {
 exports.default = gulp.parallel(funcaoPadrao, cumprimento);
 exports.cumprimento = cumprimento;
 exports.sass = compliaSass;
+exports.watch = function () {
+  gulp.watch(
+    "./source/styles/*.scss",
+    { ignoreInitial: false },
+    gulp.series(compliaSass)
+  );
+};
