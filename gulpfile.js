@@ -51,34 +51,20 @@ function compliaSass() {
     .pipe(gulp.dest("./build/styles"));
 }
 
-function funcaoPadrao(callback) {
-  setTimeout(() => {
-    console.log("Executando via Gulp");
-    callback();
-  }, 2500);
-}
-
-function cumprimento(callback) {
-  setTimeout(() => {
-    console.log("Olá, Gulp!");
-    dizTchau();
-    callback();
-  }, 3500);
-}
-
-function dizTchau() {
-  console.log("Tchau, Gulp!");
-}
-
-exports.default = gulp.parallel(funcaoPadrao, cumprimento);
-exports.cumprimento = cumprimento;
-exports.sass = compliaSass;
-exports.watch = function () {
+exports.default = function () {
   gulp.watch(
     "./source/styles/*.scss",
     { ignoreInitial: false },
     gulp.series(compliaSass)
   );
+  gulp.watch(
+    "./source/scripts/*.js",
+    { ignoreInitial: false },
+    gulp.series(comprimeJavaScript)
+  );
+  gulp.watch(
+    "./source/images/*",
+    { ignoreInitial: false },
+    gulp.series(comprimeImagens)
+  );
 };
-exports.javascript = comprimeJavaScript;
-exports.images = comprimeImagens;
