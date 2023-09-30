@@ -1,10 +1,8 @@
-const gulp = require("gulp");
-const sass = require("gulp-sass")(require("sass"));
-const sourcemaps = require("gulp-sourcemaps");
+/* Comentários
+// pacote 'gulp-uglify' responsavel por comprimir os arquivos
 // pacote 'gulp-sass' é responsável por integrar o sass com o gulp
 // o pacote 'sass' que fará toda a compilação
 
-/* 
 #métodos
 - 'src' -> recebe como parametro os arquivos e as pastas do codigo sass;
 - 'pipe' -> tem as papel de encadear as funções;
@@ -15,6 +13,18 @@ const sourcemaps = require("gulp-sourcemaps");
 - sourcemaps.init -> 
 - soucemaps.write -> criar o arquivo de maepamento
 */
+
+const gulp = require("gulp");
+const sass = require("gulp-sass")(require("sass"));
+const sourcemaps = require("gulp-sourcemaps");
+const uglify = require("gulp-uglify");
+
+function comprimeJavaScript() {
+  return gulp
+    .src("./source/scripts/*.js")
+    .pipe(uglify())
+    .pipe(gulp.dest("./build/scripts"));
+}
 
 function compliaSass() {
   return gulp
@@ -58,3 +68,4 @@ exports.watch = function () {
     gulp.series(compliaSass)
   );
 };
+exports.javascript = comprimeJavaScript;
