@@ -2,6 +2,7 @@
 // pacote 'gulp-uglify' responsavel por comprimir os arquivos
 // pacote 'gulp-sass' é responsável por integrar o sass com o gulp
 // o pacote 'sass' que fará toda a compilação
+// pacote 'gulp-obfuscate' é para dar privacidade ao codigo, o torando ilegivel no deploy
 
 #métodos
 - 'src' -> recebe como parametro os arquivos e as pastas do codigo sass;
@@ -18,11 +19,13 @@ const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const sourcemaps = require("gulp-sourcemaps");
 const uglify = require("gulp-uglify");
+const obfuscate = require("gulp-obfuscate");
 
 function comprimeJavaScript() {
   return gulp
     .src("./source/scripts/*.js")
     .pipe(uglify())
+    .pipe(obfuscate())
     .pipe(gulp.dest("./build/scripts"));
 }
 
